@@ -1,5 +1,8 @@
+"use client";
+
 import { Container } from "@/components/container";
 import { SectionHeading } from "@/components/section-heading";
+import { FormEvent, useState } from "react";
 
 const services = [
   {
@@ -77,6 +80,49 @@ const faqs = [
 
 export default function HomePage() {
   const cardDelayClasses = ["delay-1", "delay-2", "delay-3", "delay-4"];
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [submitMessage, setSubmitMessage] = useState("");
+
+  async function handleLeadSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    formData.append("access_key", "1bbbec67-9c28-4aaa-bf13-488033f2ab90");
+
+    const data = Object.fromEntries(formData.entries());
+
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+    setSubmitMessage("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Submission failed.");
+      }
+
+      form.reset();
+      setSubmitStatus("success");
+      setSubmitMessage("Request sent. We will contact you shortly.");
+    } catch {
+      setSubmitStatus("error");
+      setSubmitMessage("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <main className="relative overflow-hidden pb-24 md:pb-0" data-campaign-ready="true" data-analytics-scope="pomelli-dispatch-v1">
@@ -210,7 +256,13 @@ export default function HomePage() {
               description="Tell us about your operation and we will reach out quickly to discuss lanes, rates, and how we can support your dispatch."
             />
 
-            <form className="mt-8 grid gap-4 md:grid-cols-2" data-pomelli-form="lead-intake" action="#" method="post">
+            <form
+              className="mt-8 grid gap-4 md:grid-cols-2"
+              data-pomelli-form="lead-intake"
+              method="post"
+              action="https://api.web3forms.com/submit"
+              onSubmit={handleLeadSubmit}
+            >
               <input type="hidden" name="utm_source" value="" />
               <input type="hidden" name="utm_campaign" value="" />
               <input type="hidden" name="utm_medium" value="" />
@@ -230,7 +282,7 @@ export default function HomePage() {
                 Phone Number
                 <input
                   type="tel"
-                  name="phone"
+                  name="phone_number"
                   required
                   className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-slateBlue-400 focus:ring-2 focus:ring-slateBlue-200"
                   placeholder="(555) 123-4567"
@@ -261,7 +313,7 @@ export default function HomePage() {
               <label className="text-sm font-medium text-slate-700 md:col-span-2">
                 What kind of support do you need?
                 <textarea
-                  name="message"
+                  name="support_needed"
                   rows={4}
                   className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-slateBlue-400 focus:ring-2 focus:ring-slateBlue-200"
                   placeholder="Example: We run 2 reefers in TX, OK, and AR. Need help with load planning and better rate negotiation."
@@ -270,11 +322,20 @@ export default function HomePage() {
 
               <button
                 type="submit"
+                disabled={isSubmitting}
                 className="md:col-span-2 rounded-xl bg-slateBlue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slateBlue-700"
                 data-pomelli-cta="form-submit"
               >
-                Request Dispatch Help
+                {isSubmitting ? "Sending..." : "Request Dispatch Help"}
               </button>
+              {submitMessage ? (
+                <p
+                  className={`md:col-span-2 text-sm ${submitStatus === "success" ? "text-emerald-700" : "text-red-600"}`}
+                  role="status"
+                >
+                  {submitMessage}
+                </p>
+              ) : null}
             </form>
           </div>
         </Container>
