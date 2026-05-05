@@ -80,7 +80,7 @@ export default function HomePage() {
             <span className="niche-badge">Owner-Operators</span>
           </div>
           <div className="hero-ctas fade-in fade-in-4">
-            <a href="#lead-form" className="btn-primary">Request Dispatch Help</a>
+            <a href="/#lead-form" className="btn-primary">Request Dispatch Help</a>
             <a href="tel:+17868226069" className="btn-secondary">📞 +1 (786) 822-6069</a>
           </div>
           <p className="hero-trust fade-in fade-in-5">
