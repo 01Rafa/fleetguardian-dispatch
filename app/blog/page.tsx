@@ -14,7 +14,16 @@ export const metadata: Metadata = {
   },
 };
 
-const articles = [
+interface Article {
+  slug: string;
+  badge: string;
+  title: string;
+  excerpt: string;
+  readTime: string;
+  publishedDate: string;
+}
+
+const articles: Article[] = [
   {
     slug: "reefer-vs-dry-van-2025",
     badge: "Rates & Equipment",
@@ -22,6 +31,7 @@ const articles = [
     excerpt:
       "The rate difference between reefer and dry van is real — but it's not as simple as CPM. Fuel surcharges, deadhead, maintenance, and broker behavior all affect your actual take-home. Here's the full picture with 2025 numbers.",
     readTime: "7 min read",
+    publishedDate: "May 2025",
   },
   {
     slug: "flatbed-loads-without-dispatcher",
@@ -30,6 +40,7 @@ const articles = [
     excerpt:
       "Load boards, broker calls, rate negotiation — finding flatbed loads solo is a full-time job on top of driving. Here's what it actually takes, and when it stops making sense to do it alone.",
     readTime: "8 min read",
+    publishedDate: "May 2025",
   },
   {
     slug: "signs-you-need-truck-dispatch-service",
@@ -38,6 +49,7 @@ const articles = [
     excerpt:
       "Most owner-operators wait too long. If any of these five situations apply to you, you're already leaving money on the table every week.",
     readTime: "5 min read",
+    publishedDate: "May 2025",
   },
 ];
 
@@ -66,9 +78,9 @@ export default function BlogPage() {
                 <span className="blog-featured-tag">Featured</span>
                 {featured.badge}
               </div>
-              <div className="blog-card-title">{featured.title}</div>
+              <h2 className="blog-card-title">{featured.title}</h2>
               <div className="blog-card-excerpt">{featured.excerpt}</div>
-              <div className="blog-card-meta">May 2025 · {featured.readTime}</div>
+              <div className="blog-card-meta">{featured.publishedDate} · {featured.readTime}</div>
               <div className="blog-card-link">Read Full Article →</div>
             </a>
 
@@ -76,9 +88,9 @@ export default function BlogPage() {
               {rest.map((article) => (
                 <a key={article.slug} href={`/blog/${article.slug}`} className="blog-card">
                   <div className="blog-card-badge">{article.badge}</div>
-                  <div className="blog-card-title">{article.title}</div>
+                  <h3 className="blog-card-title">{article.title}</h3>
                   <div className="blog-card-excerpt">{article.excerpt}</div>
-                  <div className="blog-card-meta">May 2025 · {article.readTime}</div>
+                  <div className="blog-card-meta">{article.publishedDate} · {article.readTime}</div>
                   <div className="blog-card-link">Read Article →</div>
                 </a>
               ))}
