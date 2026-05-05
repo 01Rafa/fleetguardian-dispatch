@@ -40,7 +40,7 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 3,
-      name: "How to Find Flatbed Loads Without a Dispatcher",
+      name: "How to Find Flatbed Loads Without a Dispatcher (And Why Most Truckers Switch)",
       item: "https://fleetguardiandispatch.com/blog/flatbed-loads-without-dispatcher",
     },
   ],
