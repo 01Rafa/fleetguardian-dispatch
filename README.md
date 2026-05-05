@@ -1,22 +1,23 @@
-# Dispatch Web Page
+# 🚛 FleetGuardian Dispatch
 
-One-page Next.js + Tailwind landing page for a truck dispatch service targeting U.S. owner-operators and small fleets.
+Landing page profesional para empresa de servicios de Truck Dispatch 
+dirigida a owner-operators y flotas pequeñas en Estados Unidos.
 
-## Run locally
+## 🔗 Demo en vivo
+👉 [fleetguardian-dispatch.vercel.app](https://fleetguardian-dispatch.vercel.app)
 
-```bash
+## 🛠️ Tecnologías
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- Vercel (deploy)
+
+## ✨ Características
+- Diseño responsive optimizado para conversión
+- Formulario de captación de leads
+- Secciones: Hero, Servicios, Testimonios, Contacto
+- Tracking de campañas integrado
+
+## 🚀 Correr localmente
 npm install
 npm run dev
-```
-
-Open http://localhost:3000.
-
-## Update before going live
-
-- Replace phone and WhatsApp number in `app/page.tsx`
-- Connect lead form (`#lead-form`) to your backend/CRM endpoint
-- Keep `data-pomelli-*` attributes for campaign tracking
-
-## Future expansion
-
-The page is structured by sections and data arrays so testimonials and case studies can be added without changing current campaign anchors.
