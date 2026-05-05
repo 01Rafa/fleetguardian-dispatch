@@ -1098,6 +1098,9 @@ footer {
   line-height: 1.2;
   letter-spacing: 0.02em;
   margin-bottom: 0.75rem;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .article-meta {
@@ -1210,7 +1213,7 @@ footer {
 
 .article-cta-btn:hover {
   background: var(--gold-light);
-  box-shadow: 0 8px 30px rgba(201,168,76,0.3);
+  box-shadow: 0 8px 30px var(--gold-border);
   transform: translateY(-2px);
 }
 
