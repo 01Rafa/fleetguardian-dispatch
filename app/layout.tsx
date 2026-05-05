@@ -56,7 +56,7 @@ export default function RootLayout({
         <div className="bg-overlay"></div>
         <nav>
           <a href="/" className="nav-logo">
-            <img src="/logo.png" alt="Fleet Guardian" />
+            <img src="/favicon.png" alt="Fleet Guardian" />
             <div>
               <span className="nav-logo-text">FLEET GUARDIAN</span>
               <span className="nav-logo-sub">DISPATCH SERVICES</span>
